@@ -1,0 +1,259 @@
+<!DOCTYPE html>
+<html>
+  <head>
+	  <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="{{ url_for('static', filename= 'main.css') }}">
+	<title>Jominy Measurement Test</title>
+    <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
+    <script type="text/javascript">
+        google.charts.load("current", {packages:["table"]});
+        google.charts.setOnLoadCallback(drawTable);
+
+        function drawTable() {
+            var dataC = new google.visualization.DataTable()
+
+            {% for key, value in data.items() %}
+                {% if((key != "Chemical")and(key != 'Tol-Al')) %}
+                    dataC.addColumn('number', '{{key}}');
+                {% elif((key != "Chemical")and(key == 'Tol-Al')) %}
+                    dataC.addColumn('number', 'Al');
+                {% endif %}
+            {% endfor %}
+            dataC.addRow([
+            {% for key, value in data.items() %}
+                {% if(key != "Chemical") %}
+                    {{ value }},
+                {% endif %}
+            {% endfor %}
+            ]);
+
+            var optionsP = {
+                allowHtml: true,
+            };
+
+            var tableC = new google.visualization.Table(document.getElementById('Ctable'));
+            tableC.draw(dataC, {width: '100%', height: '100%',backgroundColor: { fill:'transparent' }});
+        }
+    </script>
+    <script>
+      google.charts.load('current', {'packages':['table']});
+      google.charts.setOnLoadCallback(drawTable);
+
+      function drawTable() {
+        var dataT = new google.visualization.DataTable();
+        dataT.addColumn('string', '거리');
+        dataT.addColumn('number', '경도');
+        dataT.addColumn('boolean', '이상치여부');
+        dataT.addRows([
+        ['1.5',{{pred[0]}}, Boolean({{number[0]}})],
+        ['3',{{pred[1]}}, Boolean({{number[1]}})],
+        ['5',{{pred[2]}}, Boolean({{number[2]}})],
+        ['7',{{pred[3]}}, Boolean({{number[3]}})],
+        ['9',{{pred[4]}}, Boolean({{number[4]}})],
+        ['11',{{pred[5]}}, Boolean({{number[5]}})],
+        ['13',{{pred[6]}}, Boolean({{number[6]}})],
+        ['15',{{pred[7]}}, Boolean({{number[7]}})],
+        ['20',{{pred[8]}}, Boolean({{number[8]}})],
+        ['25',{{pred[9]}}, Boolean({{number[9]}})],
+        ['30',{{pred[10]}}, Boolean({{number[10]}})],
+        ['35',{{pred[11]}}, Boolean({{number[11]}})],
+        ['40',{{pred[12]}}, Boolean({{number[12]}})],
+        ['45',{{pred[13]}}, Boolean({{number[13]}})],
+        ['50',{{pred[14]}}, Boolean({{number[14]}})]
+        ]);
+
+        var table = new google.visualization.Table(document.getElementById('table_div'));
+
+        table.draw(dataT, {width: '100%', height: '100%',backgroundColor: { fill:'transparent' }});
+      }
+    </script>
+    <script type="text/javascript">
+      google.charts.load('current', {'packages':['corechart']});
+      google.charts.setOnLoadCallback(drawChart);
+
+      function drawChart() {
+        var data = new google.visualization.DataTable();
+        data.addColumn('string', 'x');
+        data.addColumn('number', 'Predict');
+        data.addColumn({id:'p_3', type:'number', role:'interval'});
+        data.addColumn({id:'p_3', type:'number', role:'interval'});
+
+        data.addRows([
+            ['{{dis[0]}}',{{pred[0]}},{{pred[0]-2}},{{pred[0]+2}}],
+            ['{{dis[1]}}',{{pred[1]}},{{pred[1]-2}},{{pred[1]+2}}],
+            ['{{dis[2]}}',{{pred[2]}},{{pred[2]-2}},{{pred[2]+2}}],
+            ['{{dis[3]}}',{{pred[3]}},{{pred[3]-2}},{{pred[3]+2}}],
+            ['{{dis[4]}}',{{pred[4]}},{{pred[4]-2}},{{pred[4]+2}}],
+            ['{{dis[5]}}',{{pred[5]}},{{pred[5]-2}},{{pred[5]+2}}],
+            ['{{dis[6]}}',{{pred[6]}},{{pred[6]-2}},{{pred[6]+2}}],
+            ['{{dis[7]}}',{{pred[7]}},{{pred[7]-2}},{{pred[7]+2}}],
+            ['{{dis[8]}}',{{pred[8]}},{{pred[8]-2}},{{pred[8]+2}}],
+            ['{{dis[9]}}',{{pred[9]}},{{pred[9]-2}},{{pred[9]+2}}],
+            ['{{dis[10]}}',{{pred[10]}},{{pred[10]-2}},{{pred[10]+2}}],
+            ['{{dis[11]}}',{{pred[11]}},{{pred[11]-2}},{{pred[11]+2}}],
+            ['{{dis[12]}}',{{pred[12]}},{{pred[12]-2}},{{pred[12]+2}}],
+            ['{{dis[13]}}',{{pred[13]}},{{pred[13]-2}},{{pred[13]+2}}],
+            ['{{dis[14]}}',{{pred[14]}},{{pred[14]-2}},{{pred[14]+2}}]
+            ]);
+
+        var options_lines = {
+            curveType: 'function',
+            lineWidth: 4,
+            legend: 'none',
+            interval: {
+                'p_3': { 'style':'line', 'color':'#D3362D', 'lineWidth': 1.2 },
+             },
+            curveType: 'function',
+            pointSize: 7,
+            vAxis:{title: "HRC"},
+            hAxis: {title: "Distans(mm)"}
+        };
+
+        var chart_lines = new google.visualization.LineChart(document.getElementById('curve_chart'));
+        chart_lines.draw(data, options_lines);
+      }
+    </script>
+<!--    <script>-->
+<!--        google.charts.load('current', {'packages':['line']});-->
+<!--        google.charts.setOnLoadCallback(drawChart);-->
+<!--        var options_lines = {-->
+<!--            curveType: 'function',-->
+<!--            lineWidth: 2,-->
+<!--            animation: {-->
+<!--                duration: 1000,-->
+<!--                easing: 'in'-->
+<!--              },-->
+
+<!--            pointSize: 3,-->
+<!--            vAxis:{title: "HRC"},-->
+<!--            hAxis:{title: "Distans(mm)",-->
+<!--                viewWindow: {min: 0, max:4}}-->
+<!--            };-->
+
+<!--        function drawChart() {-->
+<!--          var chart = new google.visualization.LineChart(document.getElementById('visualization'));-->
+
+<!--            var dataO = new google.visualization.DataTable();-->
+<!--            dataO.addColumn('string', 'x');-->
+<!--            dataO.addColumn('number', 'Predict');-->
+<!--            dataO.addColumn('number', 'Outlier');-->
+<!--            dataO.addRows([-->
+<!--                ['{{dis[0]}}',{{pred[0]}},{{graph[0]}}],-->
+<!--                ['{{dis[1]}}',{{pred[1]}},{{graph[1]}}],-->
+<!--                ['{{dis[2]}}',{{pred[2]}},{{graph[2]}}],-->
+<!--                ['{{dis[3]}}',{{pred[3]}},{{graph[3]}}],-->
+<!--                ['{{dis[4]}}',{{pred[4]}},{{graph[4]}}],-->
+<!--                ['{{dis[5]}}',{{pred[5]}},{{graph[5]}}],-->
+<!--                ['{{dis[6]}}',{{pred[6]}},{{graph[6]}}],-->
+<!--                ['{{dis[7]}}',{{pred[7]}},{{graph[7]}}],-->
+<!--                ['{{dis[8]}}',{{pred[8]}},{{graph[8]}}],-->
+<!--                ['{{dis[9]}}',{{pred[9]}},{{graph[9]}}],-->
+<!--                ['{{dis[10]}}',{{pred[10]}},{{graph[10]}}],-->
+<!--                ['{{dis[11]}}',{{pred[11]}},{{graph[11]}}],-->
+<!--                ['{{dis[12]}}',{{pred[12]}},{{graph[12]}}],-->
+<!--                ['{{dis[13]}}',{{pred[13]}},{{graph[13]}}],-->
+<!--                ['{{dis[14]}}',{{pred[14]}},{{graph[14]}}]-->
+<!--                ]);-->
+<!--            var MAX = 15;-->
+<!--            var prevButton = document.getElementById('b1');-->
+<!--            var nextButton = document.getElementById('b2');-->
+<!--          // Disabling the button while the chart is drawing.-->
+<!--            prevButton.disabled = true;-->
+<!--            nextButton.disabled = true;-->
+<!--          google.visualization.events.addListener(chart, 'ready',-->
+<!--              function() {-->
+<!--                prevButton.disabled = options_lines.hAxis.viewWindow.min <= 0;-->
+<!--                nextButton.disabled = options_lines.hAxis.viewWindow.max >= MAX;-->
+<!--              });-->
+<!--            prevButton.onclick = function() {-->
+<!--              options_lines.hAxis.viewWindow.min -= 1;-->
+<!--              options_lines.hAxis.viewWindow.max -= 1;-->
+<!--              drawChart();-->
+<!--            }-->
+<!--            nextButton.onclick = function() {-->
+<!--              options_lines.hAxis.viewWindow.min += 1;-->
+<!--              options_lines.hAxis.viewWindow.max += 1;-->
+<!--              drawChart();-->
+<!--            }-->
+
+<!--              chart.draw(dataO, options_lines);-->
+<!--           }-->
+<!--&lt;!&ndash;        &ndash;&gt;-->
+<!--&lt;!&ndash;        drawChart();&ndash;&gt;-->
+<!--    </script>-->
+
+  </head>
+  <body>
+    <div id="container">
+        <header>
+            <div id="logo">
+                <h1>Jominy Measurement Test</h1>
+            </div>
+        </header>
+        <div id="main_graph">
+            <div id="tableC">
+                <h2>Predict graph</h2>
+                <div id="Ctable" style="width: 1105px; height: 68px"></div>
+            </div>
+            <div id="tableG">
+                <h2>Hardness by distance</h2>
+                <div id="table_div" style="width: 350px; height: 568px;"></div>
+            </div>
+            <div id="lineG">
+                <div id="curve_chart" style="width: 1105px; height: 500px"></div>
+            </div>
+
+<!--            <div id="outlier">-->
+<!--                <h2>Outlier graph</h2>-->
+<!--                <div id="OutlierT">-->
+<!--                    <div id="OutL">-->
+<!--                        <div id="visualization" style="width: 1105px; height: 468px"></div>-->
+<!--                        <button id="b1">Previous</button>-->
+<!--                        <button id="b2">Next</button>-->
+<!--                    </div>-->
+<!--                </div>-->
+<!--            </div>-->
+         </div>
+<!--         <form method ="POST" >-->
+<!--             <div>-->
+<!--                <p>강종구분</p>-->
+<!--                <input type="text" name="strongbell" id="strongbell">-->
+<!--             </div>-->
+<!--             <div>-->
+<!--                <p>거리</p>-->
+<!--                <input type="text" name="rjfl" id="rjfl">-->
+<!--             </div>-->
+<!--             <div>-->
+<!--                <p>경도</p>-->
+<!--                <input type="text" name="rudeh" id="rudeh">-->
+<!--             </div>-->
+<!--                 <input type="submit" value="Suggest" formaction="/suggest">-->
+<!--         </form>-->
+
+        <footer>
+            <div id="footerimg">
+                <img id="bigLogo" src="{{ url_for('static', filename='big.png') }}" alt="TeamCCG">
+                <img id="teamLogo" src="{{ url_for('static', filename='CCGlogo.png') }}" alt="TeamCCG">
+                <img id="seahLogo" src="{{ url_for('static', filename='Seahlogo.png') }}" alt="TeamCCG">
+            </div>
+
+            <div id="bottomMenu">
+
+              <div>
+                <ul>
+                  <li></li>
+                  <li></li>
+                  <li></li>
+                  <li></li>
+                </ul>
+              </div>
+              <p><br></p>
+              <p id="copyRight">COPYRIGHT (C) Team CCG.ALL RIGHTS RESERVED.</p>
+            </div>
+          </footer>
+    </div>
+
+
+  </body>
+</html>

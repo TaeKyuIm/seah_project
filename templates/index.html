@@ -1,0 +1,169 @@
+<!DOCTYPE HTML>
+<html lang="ko">
+<head>
+    <title>CCG PROJECT</title>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="{{ url_for('static', filename= 'main.css') }}">
+</head>
+<body>
+    <div id="container">
+        <header>
+            <div id="logo">
+                <h1>Jominy Measurement Test</h1>
+            </div>
+        </header>
+        <div id="cont">
+            <div id="Cinput">
+                <div id="main_back">
+                    <img src="{{ url_for('static', filename='main_back.png') }}" alt=" ">
+                </div>
+                <form  method="POST" name = "chemic">
+                    <div id="subtitle">
+                        <h2>Input (wt%)</h2>
+                    </div>
+                    <div id="C_shodow">
+                        <div id="C1">
+                            <div id="C3">
+                                <div id="Chemical_I">
+                                    <p>C</p>
+                                    <input type="text" name="C" id="C" placeholder="0~0.6" autocomplete="off">
+                                </div>
+
+                                <div id="Chemical_I">
+                                    <p>Si</p>
+                                    <input type="text" name="Si" id="Si" placeholder="0~0.5" autocomplete="off" >
+                                </div>
+
+                                <div id="Chemical_I">
+                                    <p>Mn</p>
+                                    <input type="text" name="Mn" id="Mn" placeholder="0.4~1.5" autocomplete="off" >
+                                </div>
+
+                                <div id="Chemical_I">
+                                    <p>P</p>
+                                    <input type="text" name="P" id="P" placeholder="0~0.03" autocomplete="off" >
+                                </div>
+                                <div id="Chemical_I">
+                                    <p>S</p>
+                                    <input type="text" name="S" id="S" placeholder="0~0.04" autocomplete="off" >
+                                </div>
+
+                                <div id="Chemical_I">
+                                    <p>Ni</p>
+                                    <input type="text" name="Ni" id="Ni" placeholder="0~2.0" autocomplete="off" >
+                                </div>
+
+                                <div id="Chemical_I">
+                                    <p>Cr</p>
+                                    <input type="text" name="Cr" id="Cr" placeholder="0~2.0" autocomplete="off" >
+                                </div>
+
+                                <div id="Chemical_I">
+                                    <p>Mo</p>
+                                    <input type="text" name="Mo" id="Mo" placeholder="0~1.0" autocomplete="off" >
+                                </div>
+                                <div id="Chemical_I">
+                                    <p>Cu</p>
+                                    <input type="text" name="Cu" id="Cu" placeholder="0~0.3" autocomplete="off" >
+                                </div>
+                            </div>
+                            <div id="C2">
+                                <div id="Chemical_I">
+                                    <p>Sn</p>
+                                    <input type="text" name="Sn" id="Sn" placeholder="0~0.4" autocomplete="off" >
+                                </div>
+
+                                <div id="Chemical_I">
+                                    <p>Al</p>
+                                    <input type="text" name="Al" id="Al" placeholder="0~0.04" autocomplete="off" >
+                                </div>
+
+                                <div id="Chemical_I">
+                                    <p>V</p>
+                                    <input type="text" name="V" id="V" placeholder="0~0.25" autocomplete="off" >
+                                </div>
+                                <div id="Chemical_I">
+                                    <p>Ti</p>
+                                    <input type="text" name="Ti" id="Ti" placeholder="0~0.2" autocomplete="off" >
+                                </div>
+
+                                <div id="Chemical_I">
+                                    <p>B</p>
+                                    <input type="text" name="B" id="B" placeholder="0~0.003" autocomplete="off" >
+                                </div>
+
+                                <div id="Chemical_I">
+                                    <p>N</p>
+                                    <input type="text" name="N" id="N" placeholder="0~0.02" autocomplete="off" >
+                                </div>
+
+                                <div id="Chemical_I">
+                                    <p>Nb</p>
+                                    <input type="text" name="Nb" id="Nb" placeholder="0~0.3" autocomplete="off" >
+                                </div>
+                                <div id="Chemical_I">
+                                    <p>Ca</p>
+                                    <input type="text" name="Ca" id="Ca" placeholder="0~0.3" autocomplete="off" >
+                                </div>
+
+                                <div id="Chemical_I">
+                                    <p>강종구분</p>
+                                    <input type="text" name="strongbell" id="strongbell" autocomplete="off" list="depList">
+                                </div>
+                                <input id="but" type="submit" value="Predict" formaction="/interval">
+                                <datalist id="depList">
+                                    <option value="AAB"></option>
+                                    <option value="AAC"></option>
+                                    <option value="AAD"></option>
+                                    <option value="BBA"></option>
+                                    <option value="BBF"></option>
+                                    <option value="BBG"></option>
+                                    <option value="BBI"></option>
+                                    <option value="BBK"></option>
+                                    <option value="BBL"></option>
+                                    <option value="BBM"></option>
+                                    <option value="BBO"></option>
+                                    <option value="CCA"></option>
+                                    <option value="CCB"></option>
+                                    <option value="CCD"></option>
+                                    <option value="CCE"></option>
+                                    <option value="CCG"></option>
+                                    <option value="CCH"></option>
+                                    <option value="MMC"></option>
+                                </datalist>
+                            </div>
+                        </div>
+                    </div>
+
+
+                </form>
+            </div>
+        </div>
+        <footer>
+            <div id="footerimg">
+                <img id="bigLogo" src="{{ url_for('static', filename='big.png') }}" alt="TeamCCG">
+                <img id="teamLogo" src="{{ url_for('static', filename='CCGlogo.png') }}" alt="TeamCCG">
+                <img id="seahLogo" src="{{ url_for('static', filename='Seahlogo.png') }}" alt="TeamCCG">
+            </div>
+
+            <div id="bottomMenu">
+
+              <div>
+                <ul>
+                  <li></li>
+                  <li></li>
+                  <li></li>
+                  <li></li>
+                </ul>
+              </div>
+              <p><br></p>
+              <p id="copyRight">COPYRIGHT (C) Team CCG.ALL RIGHTS RESERVED.</p>
+            </div>
+          </footer>
+    </div>
+</body>
+
+
+</html>
+

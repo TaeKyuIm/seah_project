@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+    {% set score = [] %}
+    {% set number = [] %}
+    {% for i in range(ac| length) %}
+        {% if score.append(ac[i]['C']) %}{% endif %}
+    {% endfor %}
+    {% set aver = score| sum / score | count %}
+    {% for i in range(ac| length) %}
+        {% if -0.005 < ac[i]['C']-aver <0.005 %}
+        {% if number.append(ac[i]) %}{% endif %}
+            <h2>{{ac[i]}}</h2>
+        {% endif %}
+    {% endfor %}
+    <h2>평균 : {{aver}}</h2>
+    <h2>추천 개수 : {{number|length}}</h2>
+    <h2>추천 전 개수 : {{ac|length}}</h2>
+
+</body>
+</html>
