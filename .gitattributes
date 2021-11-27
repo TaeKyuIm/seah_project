@@ -1,3 +1,5 @@
 *.html linguist-detectable=false
 *.linguist-vendored
 *.python linguist-vendored=false
+static/** linguist-documentation = false
+static/** linguist-vendored=false
