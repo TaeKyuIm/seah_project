@@ -28,7 +28,7 @@ some codes are deleted for securety
 -모델링\
 --stratified k-fold 교차검정 : k검정 진행을 해볼 것. k의 mini-batch에 대해서만 잘 나올 경우 가중치를 계속 유지하고, 비슷하게 나올 경우 지속적인 가중치 갱신 가능!!!!\
 
-## 어떻게 확장이 가능할까?\n
+## 어떻게 확장이 가능할까?
 -Outlier Detection : Variational Encoder 등을 활용해볼 것.\
 -성분비 추천 : 결국은 다양한 objective function을 만족하는 최적화 문제. 어떻게 자동화 시켜서 다 구할까?\
 -냉각변수 활용 : 다중공산성 문제? 이것을 어떻게 해결할지..
